@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#172347"/>
+      <stop offset="100%" stop-color="#070a14"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff4b8"/>
+      <stop offset="50%" stop-color="#f6c85f"/>
+      <stop offset="100%" stop-color="#33f3ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="44" fill="url(#bg)" stroke="#33f3ff" stroke-width="5"/>
+  <!-- Outer Crystal Octagon -->
+  <polygon points="128,16 207,49 240,128 207,207 128,240 49,207 16,128 49,49" fill="none" stroke="#f6c85f" stroke-width="3" opacity="0.75"/>
+  <!-- Yin-Yang Swirl Circle -->
+  <circle cx="128" cy="128" r="82" fill="#1b1035" stroke="url(#gold)" stroke-width="4"/>
+  <path d="M128,46 A82,82 0 0,1 128,210 A41,41 0 0,1 128,128 A41,41 0 0,0 128,46 Z" fill="url(#gold)" opacity="0.92"/>
+  <!-- Eyes of the two infinities -->
+  <circle cx="128" cy="87" r="13" fill="#140c29" stroke="#33f3ff" stroke-width="2.5"/>
+  <circle cx="128" cy="169" r="13" fill="#fff4b8" stroke="#f6c85f" stroke-width="2.5"/>
+  <!-- Central Pole Apex Star -->
+  <circle cx="128" cy="128" r="6" fill="#ffffff"/>
+</svg>

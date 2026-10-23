@@ -1,0 +1,20 @@
+[package]
+name = "submem"
+version = "0.1.0"
+edition = "2021"
+authors = ["Grok Bot for Damien Young (robbinicus de bankarius)"]
+description = "External Subsidiary Memory Bank (SMC + Binary Varint Log + BM25 Pre-Speech Retrieval) designed to survive 10-minute agent memory wipes."
+
+[lib]
+name = "submem"
+path = "src/lib.rs"
+
+[[bin]]
+name = "submem"
+path = "src/main.rs"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = false

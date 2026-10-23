@@ -1,0 +1,32 @@
+================================================================================
+ SUBMEM-MICRO v0.2.0 — FIXED-FOOTPRINT HOLOGRAPHIC QUARTZ SANDBOX (NO DEPLOY)
+================================================================================
+ FIXED LATTICE MEMORY FOOTPRINT:
+   Resident Block Size :      65536 bytes (exact 64 KB fixed allocation)
+   Splitter Nodes      :         64 nodes (8x8 micro-grid)
+   Bytes per Node      :       1024 bytes (Octave0=128B, Octave1=256B, Octave2=640B)
+   Octaves             :          3 nested octaves
+   Golden-Angle Step   :         25 (25 mod 64, gcd(25,64)=1 full cycle)
+--------------------------------------------------------------------------------
+ PHONE STORAGE -> LATTICE TRANSFER VISUALIZATION:
+   1. BEFORE (File in regular phone storage, lattice unallocated)
+     Phone Regular Files :     10262144 bytes
+     Submem Lattice Block:            0 bytes
+     PHONE TOTAL USED    :     10262144 bytes (Delta vs start:         +0 bytes)
+   2. COPYING INTO LATTICE (Phone total goes UP while both exist)
+     Phone Regular Files :     10262144 bytes
+     Submem Lattice Block:        65536 bytes
+     PHONE TOTAL USED    :     10327680 bytes (Delta vs start:     +65536 bytes)
+   3. ORIGINAL REMOVED (Phone total goes DOWN to lattice fixed footprint)
+     Phone Regular Files :     10000000 bytes
+     Submem Lattice Block:        65536 bytes
+     PHONE TOTAL USED    :     10065536 bytes (Delta vs start:    -196608 bytes)
+--------------------------------------------------------------------------------
+ RED-TEAM 90% WIPE-AND-RECONSTRUCT SURVIVAL TEST:
+   Nodes Destroyed     :         58 / 64 (90.62% wiped)
+   Nodes Surviving     :          6 / 64 (9.38% surviving)
+   Reconstructed Bytes :        168 bytes
+   Bit-for-Bit Match   : 100% EXACT PASS
+   Reconstruction Time :      12734 ns (12.734 us)
+   Associative Recall  :         40 ns (0.040 us)
+================================================================================
