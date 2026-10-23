@@ -1,0 +1,7 @@
+[package]
+name = "submem-micro"
+version = "0.2.0-micro"
+edition = "2021"
+description = "Micro-scale 64KB fixed-footprint 3-Octave Phantom Quartz Holographic Memory Sandbox"
+
+[dependencies]
