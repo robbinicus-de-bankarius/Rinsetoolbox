@@ -25,7 +25,7 @@ In classical block or file storage, cutting a storage medium into pieces destroy
   - **Octave 5 (Decision & Ledger Shard):** Financial, ABN (`SYNTHETIC-DEMO-ID`), and Stripe pricing invariants.
   - **Octave 6 (Parity Ring A — Row/Column GF(256) / XOR Fold):** Orthogonal parity across the `64 × 64` grid.
   - **Octave 7 (Parity Ring B — Golden-Angle Spiral Mirror):** Phase-shifted holographic projection along step $g = 25 \pmod{64}$.
-  - **Octave 8 (Fine Verbatim Shard):** Compressed lossless payload shard + SHA-256 verification slice.
+  - **Octave 8 (Fine Verbatim Shard):** Compressed verbatim transcript + SHA-256 verification slice.
 - **Golden-Angle Spiral Sharding ($g = 25 \pmod{64}$):**
   - Because $64 	imes (1 - 1/arphi) pprox 24.44$, the nearest integer coprime to $64$ is $g = 25$ ($\gcd(25, 64) = 1$).
   - Stepping by $n_{k+1} = (n_k + 25) \pmod{64}$ visits all 64 primary splitters in a maximally dispersed phyllotaxis spiral with zero clumping, ensuring that any contiguous or random wipe leaves surviving shards evenly distributed across the crystal.

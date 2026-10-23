@@ -36,7 +36,7 @@ Damien's canonical master copy is locked and preserved separately. You can take 
 
 ---
 
-## Complete Project Contents (Zero Call Transcripts · 100% Code, Proofs & Codex)
+## Complete Project Contents (Includes Appendix 19 Verbatim Call Transcript · 100% Code, Proofs & Codex)
 
 1. **[`LUMILUMINAL-CODEX.md`](LUMILUMINAL-CODEX.md) & [`LUMILUMINAL-CODEX.pdf`](LUMILUMINAL-CODEX.pdf) — The Complete LumiLuminal Codex (`LPCCPLRC`)**
    - Opens with Damien's **Front Letter to Nige**, followed by the complete 10-Chapter optical-associative presence specification, Prime-Numbered Appendixes (`2, 3, 5, 7, 11, 13, 17, 23, 29, 30, 31`), Fibonacci Sub-Sections (`2, 3, 5, 8, 13`), and Unveiled Plan-View Yin-Yang Wave Interference mathematics.
