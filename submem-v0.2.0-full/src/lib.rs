@@ -11,6 +11,7 @@ pub mod codec;
 pub mod crystal;
 pub mod error;
 pub mod index;
+pub mod mycelium;
 pub mod reservoir;
 pub mod smc;
 pub mod types;

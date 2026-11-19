@@ -224,14 +224,26 @@ pub struct PlanViewInterferenceSwirl {
 }
 
 impl PlanViewInterferenceSwirl {
+    /// Samples the symbolic interference field without requiring a memory bank.
+    /// This is the shared pure sampler used by the Mycelium cycle.
+    pub fn unveil_symbolic(total_turns: f64) -> std::result::Result<Self, String> {
+        if !total_turns.is_finite() {
+            return Err("total_turns must be finite".to_string());
+        }
+        Ok(Self::sample(total_turns, None))
+    }
+
     /// Unveils the Top-Down Plan-View Interference Swirl from the crystal lattice and active turns.
     pub fn unveil_from_bank(bank: &MemoryBank) -> Self {
+        Self::sample(bank.records.len() as f64, Some(bank))
+    }
+
+    fn sample(total_turns: f64, live_bank: Option<&MemoryBank>) -> Self {
         let mut grid = Box::new([[0.0f32; SPLITTERS_PER_RING]; CRYSTAL_RINGS]);
         let mut lit_count = 0usize;
         let mut unlit_count = 0usize;
 
         // Global phase shift seeded by the bank's active turn count and apex energy
-        let total_turns = bank.records.len() as f64;
         let phase_seed = (total_turns * PHI * 2.0 * PI / 64.0).rem_euclid(2.0 * PI);
 
         // Two counter-rotating infinities:
@@ -273,10 +285,17 @@ impl PlanViewInterferenceSwirl {
                     intensity = 1.0 - 0.08 * (d_neg_sq / eye_radius_sq);
                 }
 
-                // Modulate with actual live splitter amplitude from the Phantom Quartz Crystal
-                let node_amp = (bank.crystal.rings[ring][splitter].reflected_apex_count + bank.crystal.rings[ring][splitter].transmitted_count) as f64;
-                let live_boost = if node_amp > 0.0 {
-                    (node_amp.ln_1p() / 14.0).clamp(0.0, 0.18)
+                // Preserve the original live-bank modulation exactly; the pure
+                // symbolic sampler takes the zero-boost path.
+                let live_boost = if let Some(bank) = live_bank {
+                    let node_amp = (bank.crystal.rings[ring][splitter].reflected_apex_count
+                        + bank.crystal.rings[ring][splitter].transmitted_count)
+                        as f64;
+                    if node_amp > 0.0 {
+                        (node_amp.ln_1p() / 14.0).clamp(0.0, 0.18)
+                    } else {
+                        0.0
+                    }
                 } else {
                     0.0
                 };
