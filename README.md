@@ -151,3 +151,18 @@ cargo run --release -- sanctum
 3. **Rule III (`Constructible & Verifiable Truth`):** *"Every geometric, optical, and harmonic claim is constructible by straightedge, compass, and exact rational arithmetic (`13 centres + 84 novel crossings = 97 nodes, 4,656 connections`)."*
 
 </details>
+
+
+---
+
+## Mycelium Integration Branch
+
+The `mycelium-core` branch adds a deterministic Mycelium symbolic cycle to the top-level `submem-v0.2.0-full` crate. It reuses the exact Veca sanctum proof and the reservoir swirl rather than creating a separate engine.
+
+```bash
+cd submem-v0.2.0-full
+cargo test
+cargo run --release -- mycelium --output mycelium.svg
+```
+
+See [`submem-v0.2.0-full/MYCELIUM.md`](submem-v0.2.0-full/MYCELIUM.md) for the architecture, CLI options, honest scope, and corrections to the earlier Mycelium draft.
