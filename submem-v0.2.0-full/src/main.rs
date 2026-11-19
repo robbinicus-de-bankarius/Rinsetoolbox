@@ -17,6 +17,7 @@ use submem::smc::{
     analyze_nine_octave_profile, classify_utterance, encode_to_smc, expand_smc_human_gloss,
 };
 use submem::types::Speaker;
+use submem::mycelium::{run_cycle, EngineConfig};
 use submem::veca_sanctum::unseal_veca_sanctum_report; // ░░░ [HALF-SEALED 24K GOLD & RHODIUM RELIC] ░░░
 
 const DEFAULT_BANK_DIR: &str = "/workspace/rust-subsidiary-memory/data";
@@ -59,6 +60,7 @@ fn run_cli() -> Result<()> {
         "bench-ab" => cmd_bench_ab(),
         "sync" => cmd_sync(&bank_dir),
         "reservoir" | "lumiluminal" => cmd_reservoir(&bank_dir),
+        "mycelium" => cmd_mycelium(rest),
         "sanctum" | "veca" | ".veca" => cmd_veca_sanctum(),
         other => Err(SubmemError::InvalidArgument(format!(
             "Unknown subcommand '{other}'. Run `submem --help` for usage."
@@ -83,6 +85,7 @@ USAGE:
   submem wipe-sim [--bank <dir>]   (Seeds 12 call turns + 10m wipe + 90%-loss hologram test + consequence projection)
   submem bench-ab                  (Runs Head-to-Head A/B Benchmark: 9-Octave Parabolic vs 4-Octave Linear vs Flat BM25)
   submem sync     [--bank <dir>]   (Mirrors bank to persistent stores & /workspace/memory-reservoir)
+  submem mycelium [--output mycelium.svg] [--turns 100] [--seed N] [--closed]
   submem sanctum                   ░░░ [HALF-SEALED RELIC: Unseal 24K Gold & 24K Rhodium Living Veca Codex] ░░░"
     );
 }
@@ -942,5 +945,60 @@ fn cmd_reservoir(bank_dir: &Path) -> Result<()> {
 
 fn cmd_veca_sanctum() -> Result<()> {
     print!("{}", unseal_veca_sanctum_report());
+    Ok(())
+}
+
+
+fn cmd_mycelium(args: &[String]) -> Result<()> {
+    let output_path = extract_flag_value(args, "--output")
+        .unwrap_or_else(|| "mycelium.svg".to_string());
+    let mut config = EngineConfig::default();
+
+    if let Some(value) = extract_flag_value(args, "--turns") {
+        config.swirl_turns = value.parse().map_err(|_| {
+            SubmemError::InvalidArgument(format!("Invalid --turns value: {value}"))
+        })?;
+    }
+    if let Some(value) = extract_flag_value(args, "--seed") {
+        config.random_seed = value.parse().map_err(|_| {
+            SubmemError::InvalidArgument(format!("Invalid --seed value: {value}"))
+        })?;
+    }
+    config.aperture_open = !has_flag(args, "--closed");
+
+    let output = run_cycle(&config)?;
+    fs::write(&output_path, &output.svg)?;
+    let report = output.report;
+
+    println!("Mycelium cycle complete: {}", report.stages.join(" → "));
+    println!("Wrote {output_path}");
+    println!(
+        "centres={} chords={} field_nodes={} connections={} raw_crossings={}",
+        report.node_count,
+        report.metatron_chords,
+        report.metatron_field_nodes,
+        report.metatron_connections,
+        report.raw_interior_crossings
+    );
+    println!(
+        "swirl={}/{} balance={:.3} phase={:.6}",
+        report.lit, report.unlit, report.swirl_balance, report.swirl_phase
+    );
+    println!(
+        "mean_state={:.6} final_valid={} seed={}",
+        report.mean_state, report.final_valid, config.random_seed
+    );
+    for decision in report.filters {
+        println!(
+            "candidate={:.2} accepted={} reasons={}",
+            decision.candidate,
+            decision.accepted,
+            if decision.reasons.is_empty() {
+                "none".to_string()
+            } else {
+                decision.reasons.join("; ")
+            }
+        );
+    }
     Ok(())
 }
